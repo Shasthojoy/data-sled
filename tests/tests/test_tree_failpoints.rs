@@ -295,7 +295,6 @@ fn failpoints_bug_4() {
 }
 
 #[test]
-#[ignore]
 fn failpoints_bug_5() {
     // postmortem 1:
     assert!(prop_tree_crashes_nicely(
@@ -319,7 +318,6 @@ fn failpoints_bug_5() {
 }
 
 #[test]
-#[ignore]
 fn failpoints_bug_6() {
     // postmortem 1:
     assert!(prop_tree_crashes_nicely(
@@ -335,6 +333,24 @@ fn failpoints_bug_6() {
             Set,
             Set,
             Restart,
+        ],
+        false,
+    ))
+}
+
+#[test]
+fn failpoints_bug_7() {
+    // postmortem 1:
+    assert!(prop_tree_crashes_nicely(
+        vec![
+            Set,
+            Set,
+            Set,
+            FailPoint("trailer write"),
+            Set,
+            Set,
+            Del(0),
+            Set,
         ],
         false,
     ))
